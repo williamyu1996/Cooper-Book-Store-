@@ -1,19 +1,24 @@
 <?php
 
-  include ('book_sc_fns.php');
-//session variable to
-  session_start();
 
-  do_html_header("Checkout");
+require_once('book_sc_fns.php');
+session_start();
 
-  if(($_SESSION['cart']) && (array_count_values($_SESSION['cart']))) {
-    display_cart($_SESSION['cart'], false, 0);
-    display_checkout_form();
+do_html_header("Updating category");
+if (check_admin_user()) {
+  if (filled_out($_POST)) {
+    if(update_category($_POST['catid'], $_POST['catname'])) {
+      echo "<p>Category was updated.</p>";
+    } else {
+      echo "<p>Category could not be updated.</p>";
+    }
   } else {
-    echo "<p>There are no items in your cart</p>";
+    echo "<p>You have not filled out the form.  Please try again.</p>";
   }
+  do_html_url("admin.php", "Back to administration menu");
+} else {
+  echo "<p>You are not authorised to view this page.</p>";
+}
+do_html_footer();
 
-  display_button("show_cart.php", "continue-shopping", "Continue Shopping");
-
-  do_html_footer();
 ?>
