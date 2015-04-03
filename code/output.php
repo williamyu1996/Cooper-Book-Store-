@@ -284,7 +284,7 @@ function display_card_form($name) {
     <td colspan="2" align="center">
       <p><strong>Please press Purchase to confirm your purchase, or Continue Shopping to
       add or remove items</strong></p>
-     <?php display_form_button('purchase', 'Purchase These Items'); ?>
+     <?php display_form_button('purchase'); ?>
     </td>
   </tr>
   </table>
@@ -380,11 +380,8 @@ function display_button($target, $name) {
           </a></div>";
 }
 
-function display_form_button($image, $alt) {
-  echo "<div align=\"center\"><input type=\"image\"
-           src=\"images/".$image.".gif\"
-           alt=\"".$alt."\" border=\"0\" height=\"50\"
-           width=\"135\"/></div>";
+function display_form_button($image) {
+  echo "<input type=\"submit\" value=$image>";
 }
 
 ?>
